@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Experiment 5
+        </title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            const products=[
+                {name:"product1",Price:20,category:"Electronics"},
+                {name:"product2",Price:30,category:"Clothes"},
+                {name:"product3",Price:40,category:"Electronics"},
+                {name:"product4",Price:50,category:"clothes"},
+                {name:"product5",Price:60,category:"Electronics"},
+                {name:"product6",Price:70,category:"clothes"},
+                {name:"product7",Price:80,category:"Electronics"},
+                {name:"product8",Price:90,category:"clothes"},
+            ];
+            const productsByCategory=products.reduce((acc,product)=>{
+                const category = product.category;
+                if(!acc[category]){
+                    acc[category]=[];
+                }
+                acc[category].push(product);
+                    return acc;
+            },{});
+            const avgPriceByCategory=Object.keys(productsByCategory).map(category=>{
+                const sum=productsByCategory[category].reduce((acc,product)=>acc+product.Price,0);
+                return{category:category,average:sum / productsByCategory[category].length};
+            });
+            const highPricedCategories=avgPriceByCategory.filter(category=>category.average>50);
+            console.log(highPricedCategories);
+        </script>
+    </body>
+</html>
